@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomPlatform>
+	<Active>true</Active>
+	<CreateDate>2019\07\26 9:42:8.387</CreateDate>
+	<CreatedByUserID>621</CreatedByUserID>
+	<LastUpdateDate>2019\07\26 9:52:31.467</LastUpdateDate>
+	<LastUpdateUserID>621</LastUpdateUserID>
+	<Name>Avaya Voice</Name>
+	<ShellPrompt>(&gt;|&gt; |#|# )$</ShellPrompt>
+	<ConfigPrompt></ConfigPrompt>
+	<ElevatedPrompt></ElevatedPrompt>
+	<EndOfLine>\r</EndOfLine>
+	<ExitCommand>exit</ExitCommand>
+    <Interrupt></Interrupt>
+    <PasswordCommand></PasswordCommand>
+    <Elevation>false</Elevation>
+    <ElevationCommand></ElevationCommand>
+    <PlatformId>1036</PlatformId>
+    <Ssh>true</Ssh>
+    <Port>22</Port>
+    <LogonAccount>false</LogonAccount>
+    <AccountNameFormatTypeFlag>false</AccountNameFormatTypeFlag>
+    <SupportsJumphost>false</SupportsJumphost>
+	<ExpectScriptItems>
+		<ExpectScript type="Check Password">
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>After login</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>2</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Success(Password check succeeded)</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;Interrupt&gt;&gt;&lt;&lt;exitcommand&gt;&gt;@Failure(Password change failed: Timeout)</Response>
+				<Stimulus>(?i)timeout</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Password check failed)</Response>
+				<Stimulus>Access Denied</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+		</ExpectScript>
+		<ExpectScript type="Change Password">
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>After login</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>putty</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>sudo /opt/ecs/bin/cmpasswd &lt;&lt;manacctname&gt;&gt;</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>&lt;&lt;manacctnewpwd&gt;&gt;</Response>
+				<Stimulus>New UNIX password: </Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>&lt;&lt;manacctnewpwd&gt;&gt;</Response>
+				<Stimulus>Retype new UNIX password: </Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>2</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)</Response>
+				<Stimulus>passwd: all authentication tokens updated successfully.</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)</Response>
+				<Stimulus>(?i)(unknown|fail|error|return code|timeout)</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+		</ExpectScript>
+		<ExpectScript type="Replace Public Key">
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>After login</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+		</ExpectScript>
+	</ExpectScriptItems>
+	<Template>{
+	"description":"",
+	"name":"Avaya Voice",
+	"properties":{},
+	"tags":{"funcacctname":"",
+	"funcacctpwd":"",
+	"funcacctkey":"",
+	"funcacctkeypass":"",
+	"address":"",
+	"elevationcommand":"",
+	"port":"22",
+	"assetname":"",
+	"manacctname":"",
+	"manacctoldpwd":"",
+	"manacctoldkey":"",
+	"manacctoldkeypass":"",
+	"manacctnewpwd":"",
+	"endofline":"\u000d",
+	"exitcommand":"exit",
+	"interrupt":"",
+	"passwordcommand":"", "timeout":"20000",
+	"prompt":"(&gt;|&gt; |#|# )$",
+	"configureprompt":"",
+	"elevatedprompt":"",
+	"enablepassword":"",
+	"loginusername":"",
+	"loginuserpwd":"",
+	"loginuserkey":"",
+	"loginuserkeypass":"",
+	"custommetadata":"[{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"After login\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"putty\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"sudo \\\/opt\\\/ecs\\\/bin\\\/cmpasswd &lt;&lt;manacctname&gt;&gt;\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"&lt;&lt;manacctnewpwd&gt;&gt;\",\"Stimulus\":\"New UNIX password: \",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"&lt;&lt;manacctnewpwd&gt;&gt;\",\"Stimulus\":\"Retype new UNIX password: \",\"UseErrorHandling\":true},{\"Action\":2,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)\",\"Stimulus\":\"passwd: all authentication tokens updated successfully.\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Error handling\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)\",\"Stimulus\":\"(?i)(unknown|fail|error|return code|timeout)\",\"UseErrorHandling\":false}]",
+	"custommetadatacheckpassword":"[{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"After login\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":2,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Success(Password check succeeded)\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Error handling\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;Interrupt&gt;&gt;&lt;&lt;exitcommand&gt;&gt;@Failure(Password change failed: Timeout)\",\"Stimulus\":\"(?i)timeout\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Password check failed)\",\"Stimulus\":\"Access Denied\",\"UseErrorHandling\":false}]",
+	"custommetadatareplacepublickey":"[{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"After login\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":true},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Error handling\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false}]"},
+	"work":[
+			{"expect":[
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?i)(unknown|fail|error|return code|timeout))", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?i)(unknown|fail|error|return code|timeout))", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?i)(unknown|fail|error|return code|timeout))", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?i)(unknown|fail|error|return code|timeout))", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)", "stimulus":"@RE(passwd: all authentication tokens updated successfully.)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"&lt;&lt;manacctnewpwd&gt;&gt;&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(Retype new UNIX password: )", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"&lt;&lt;manacctnewpwd&gt;&gt;&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(New UNIX password: )", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"sudo \/opt\/ecs\/bin\/cmpasswd &lt;&lt;manacctname&gt;&gt;&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"putty&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"name":"ChangePassword",
+	"type":1},{"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Success(Password check succeeded)", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"name":"CheckPassword",
+	"type":2},{"expect":[
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error)", "stimulus":"@RE()", "timeout":0}],
+	"id":"", "line_delay":-1,"response":"&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE()", "timeout":-1}],
+	"name":"ReplacePublicKey",
+	"type":4}]}</Template>
+</CustomPlatform>

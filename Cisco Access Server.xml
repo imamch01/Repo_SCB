@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomPlatform>
+	<Active>true</Active>
+	<CreateDate>2019\07\30 9:41:20.943</CreateDate>
+	<CreatedByUserID>622</CreatedByUserID>
+	<LastUpdateDate>2019\07\30 9:41:20.943</LastUpdateDate>
+	<LastUpdateUserID>622</LastUpdateUserID>
+	<Name>Cisco Access Server</Name>
+	<ShellPrompt>(&gt;|&gt; |#|# )$</ShellPrompt>
+	<ConfigPrompt>\(config\)(#|# )$</ConfigPrompt>
+	<ElevatedPrompt>[^(&gt;|&gt; |#|# )]$</ElevatedPrompt>
+	<EndOfLine>\r</EndOfLine>
+	<ExitCommand>exit</ExitCommand>
+    <Interrupt>&lt;&lt;ctrl-c&gt;&gt;</Interrupt>
+    <PasswordCommand></PasswordCommand>
+    <Elevation>false</Elevation>
+    <ElevationCommand></ElevationCommand>
+    <PlatformId>1049</PlatformId>
+    <Ssh>true</Ssh>
+    <Port>22</Port>
+    <LogonAccount>false</LogonAccount>
+    <AccountNameFormatTypeFlag>true</AccountNameFormatTypeFlag>
+    <SupportsJumphost>false</SupportsJumphost>
+	<ExpectScriptItems>
+		<ExpectScript type="Check Password">
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>After login</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>2</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Success(Password check succeeded)</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;Interrupt&gt;&gt;&lt;&lt;exitcommand&gt;&gt;@Failure(Password change failed: Timeout)</Response>
+				<Stimulus>(?i)timeout</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+		</ExpectScript>
+		<ExpectScript type="Change Password">
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>After login</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>show version | grep NX-OS</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>1</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>3</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>&lt;&lt;cr&gt;&gt;</Response>
+				<Stimulus>(?&lt;!grep )NX-OS</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>1</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>4</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response>enable</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>3</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Statement Group: 1</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>3</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>true</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 1</ParentName>
+				<Response>&lt;&lt;cr&gt;&gt;</Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>3</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 1</ParentName>
+				<Response>conf t</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>3</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 1</ParentName>
+				<Response>username &lt;&lt;manacctname&gt;&gt; password &lt;&lt;manacctnewpwd&gt;&gt;</Response>
+				<Stimulus>&lt;&lt;configureprompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>3</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 1</ParentName>
+				<Response>end</Response>
+				<Stimulus>&lt;&lt;configureprompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>3</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 1</ParentName>
+				<Response>write mem</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>2</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>3</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 1</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>4</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Statement Group: 2</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>4</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>true</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 2</ParentName>
+				<Response>enable</Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>1</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>5</Goto>
+				<Id>3</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 2</ParentName>
+				<Response></Response>
+				<Stimulus>(?i)password: $</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>1</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>6</Goto>
+				<Id>3</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 2</ParentName>
+				<Response></Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>5</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Statement Group: 3</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>5</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>true</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 3</ParentName>
+				<Response>&lt;&lt;enablepassword&gt;&gt;</Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>5</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 3</ParentName>
+				<Response>conf t</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>5</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 3</ParentName>
+				<Response>username &lt;&lt;manacctname&gt;&gt; password &lt;&lt;manacctnewpwd&gt;&gt;</Response>
+				<Stimulus>&lt;&lt;configureprompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>5</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 3</ParentName>
+				<Response>end</Response>
+				<Stimulus>&lt;&lt;configureprompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>5</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 3</ParentName>
+				<Response>write</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>2</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>5</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 3</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>6</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Statement Group: 4</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>6</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>true</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 4</ParentName>
+				<Response>conf t</Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>6</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 4</ParentName>
+				<Response>username &lt;&lt;manacctname&gt;&gt; password &lt;&lt;manacctnewpwd&gt;&gt;</Response>
+				<Stimulus>&lt;&lt;configureprompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>6</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 4</ParentName>
+				<Response>end</Response>
+				<Stimulus>&lt;&lt;configureprompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>6</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 4</ParentName>
+				<Response>write</Response>
+				<Stimulus>&lt;&lt;prompt&gt;&gt;</Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>2</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>6</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Statement Group: 4</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)</Response>
+				<Stimulus>\[OK\]</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)</Response>
+				<Stimulus>(?i)timeout</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)</Response>
+				<Stimulus>%|(?i)error</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)</Response>
+				<Stimulus>password is weak</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)</Response>
+				<Stimulus>cannot make changes</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)</Response>
+				<Stimulus>No token match|% String failed</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)</Response>
+				<Stimulus>(?&lt;!password |username |secret )%|(?i)error</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)</Response>
+				<Stimulus>%(?i)error</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)</Response>
+				<Stimulus>% Error</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)</Response>
+				<Stimulus>% Access denied</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)</Response>
+				<Stimulus>Invalid</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)</Response>
+				<Stimulus>ERROR: Can not use MD5 secrets</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)</Response>
+				<Stimulus>ERROR: Can not have both a user password and a user secret</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)</Response>
+				<Stimulus>% Incomplete command</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response>&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)</Response>
+				<Stimulus>% Invalid Password</Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+		</ExpectScript>
+		<ExpectScript type="Replace Public Key">
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>After login</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>0</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>1</Id>
+				<IsErrorHandler>false</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>After login</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>true</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>true</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+			<ExpectScriptItem>
+				<Action>3</Action>
+				<ExpectType>0</ExpectType>
+				<Goto>0</Goto>
+				<Id>2</Id>
+				<IsErrorHandler>true</IsErrorHandler>
+				<IsGotoDestination>false</IsGotoDestination>
+				<IsParent>false</IsParent>
+				<ParentName>Error handling</ParentName>
+				<Response></Response>
+				<Stimulus></Stimulus>
+				<UseErrorHandling>false</UseErrorHandling>
+			</ExpectScriptItem>
+		</ExpectScript>
+	</ExpectScriptItems>
+	<Template>{
+	"description":"",
+	"name":"Cisco Access Server",
+	"properties":{},
+	"tags":{"funcacctname":"",
+	"funcacctpwd":"",
+	"funcacctkey":"",
+	"funcacctkeypass":"",
+	"address":"",
+	"elevationcommand":"",
+	"port":"22",
+	"assetname":"",
+	"manacctname":"",
+	"manacctoldpwd":"",
+	"manacctoldkey":"",
+	"manacctoldkeypass":"",
+	"manacctnewpwd":"",
+	"endofline":"\u000d",
+	"exitcommand":"exit",
+	"interrupt":"&lt;&lt;ctrl-c&gt;&gt;",
+	"passwordcommand":"", "timeout":"20000",
+	"prompt":"(&gt;|&gt; |#|# )$",
+	"configureprompt":"\\(config\\)(#|# )$",
+	"elevatedprompt":"[^(&gt;|&gt; |#|# )]$",
+	"enablepassword":"",
+	"loginusername":"",
+	"loginuserpwd":"",
+	"loginuserkey":"",
+	"loginuserkeypass":"",
+	"custommetadata":"[{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"After login\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"show version | grep NX-OS\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":1,\"ExpectType\":0,\"Goto\":3,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"&lt;&lt;cr&gt;&gt;\",\"Stimulus\":\"(?&lt;!grep )NX-OS\",\"UseErrorHandling\":true},{\"Action\":1,\"ExpectType\":0,\"Goto\":4,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"enable\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":3,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Statement Group: 1\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":3,\"IsErrorHandler\":false,\"IsGotoDestination\":true,\"IsParent\":false,\"ParentName\":\"Statement Group: 1\",\"Response\":\"&lt;&lt;cr&gt;&gt;\",\"Stimulus\":\"\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":3,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 1\",\"Response\":\"conf t\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":3,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 1\",\"Response\":\"username &lt;&lt;manacctname&gt;&gt; password &lt;&lt;manacctnewpwd&gt;&gt;\",\"Stimulus\":\"&lt;&lt;configureprompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":3,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 1\",\"Response\":\"end\",\"Stimulus\":\"&lt;&lt;configureprompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":3,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 1\",\"Response\":\"write mem\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":2,\"ExpectType\":0,\"Goto\":0,\"Id\":3,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 1\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":4,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Statement Group: 2\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":4,\"IsErrorHandler\":false,\"IsGotoDestination\":true,\"IsParent\":false,\"ParentName\":\"Statement Group: 2\",\"Response\":\"enable\",\"Stimulus\":\"\",\"UseErrorHandling\":true},{\"Action\":1,\"ExpectType\":0,\"Goto\":5,\"Id\":3,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 2\",\"Response\":\"\",\"Stimulus\":\"(?i)password: $\",\"UseErrorHandling\":false},{\"Action\":1,\"ExpectType\":0,\"Goto\":6,\"Id\":3,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 2\",\"Response\":\"\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":5,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Statement Group: 3\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":5,\"IsErrorHandler\":false,\"IsGotoDestination\":true,\"IsParent\":false,\"ParentName\":\"Statement Group: 3\",\"Response\":\"&lt;&lt;enablepassword&gt;&gt;\",\"Stimulus\":\"\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":5,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 3\",\"Response\":\"conf t\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":5,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 3\",\"Response\":\"username &lt;&lt;manacctname&gt;&gt; password &lt;&lt;manacctnewpwd&gt;&gt;\",\"Stimulus\":\"&lt;&lt;configureprompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":5,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 3\",\"Response\":\"end\",\"Stimulus\":\"&lt;&lt;configureprompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":5,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 3\",\"Response\":\"write\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":2,\"ExpectType\":0,\"Goto\":0,\"Id\":5,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 3\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":6,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Statement Group: 4\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":6,\"IsErrorHandler\":false,\"IsGotoDestination\":true,\"IsParent\":false,\"ParentName\":\"Statement Group: 4\",\"Response\":\"conf t\",\"Stimulus\":\"\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":6,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 4\",\"Response\":\"username &lt;&lt;manacctname&gt;&gt; password &lt;&lt;manacctnewpwd&gt;&gt;\",\"Stimulus\":\"&lt;&lt;configureprompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":6,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 4\",\"Response\":\"end\",\"Stimulus\":\"&lt;&lt;configureprompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":6,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 4\",\"Response\":\"write\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":true},{\"Action\":2,\"ExpectType\":0,\"Goto\":0,\"Id\":6,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Statement Group: 4\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)\",\"Stimulus\":\"\\\\[OK\\\\]\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Error handling\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)\",\"Stimulus\":\"(?i)timeout\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)\",\"Stimulus\":\"%|(?i)error\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)\",\"Stimulus\":\"password is weak\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)\",\"Stimulus\":\"cannot make changes\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)\",\"Stimulus\":\"No token match|% String failed\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)\",\"Stimulus\":\"(?&lt;!password |username |secret )%|(?i)error\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)\",\"Stimulus\":\"%(?i)error\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)\",\"Stimulus\":\"% Error\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)\",\"Stimulus\":\"% Access denied\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)\",\"Stimulus\":\"Invalid\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)\",\"Stimulus\":\"ERROR: Can not use MD5 secrets\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)\",\"Stimulus\":\"ERROR: Can not have both a user password and a user secret\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)\",\"Stimulus\":\"% Incomplete command\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)\",\"Stimulus\":\"% Invalid Password\",\"UseErrorHandling\":false}]",
+	"custommetadatacheckpassword":"[{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"After login\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":2,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":\"&lt;&lt;exitcommand&gt;&gt;@Success(Password check succeeded)\",\"Stimulus\":\"&lt;&lt;prompt&gt;&gt;\",\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Error handling\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":\"&lt;&lt;Interrupt&gt;&gt;&lt;&lt;exitcommand&gt;&gt;@Failure(Password change failed: Timeout)\",\"Stimulus\":\"(?i)timeout\",\"UseErrorHandling\":false}]",
+	"custommetadatareplacepublickey":"[{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"After login\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":0,\"ExpectType\":0,\"Goto\":0,\"Id\":1,\"IsErrorHandler\":false,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"After login\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":true},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":true,\"ParentName\":\"Error handling\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false},{\"Action\":3,\"ExpectType\":0,\"Goto\":0,\"Id\":2,\"IsErrorHandler\":true,\"IsGotoDestination\":false,\"IsParent\":false,\"ParentName\":\"Error handling\",\"Response\":null,\"Stimulus\":null,\"UseErrorHandling\":false}]"},
+	"work":[
+			{"expect":[
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"write&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"end&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;configureprompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"username &lt;&lt;manacctname&gt;&gt; password &lt;&lt;manacctnewpwd&gt;&gt;&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;configureprompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"conf t&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"&lt;&lt;enablepassword&gt;&gt;&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE((?i)password: $)", "timeout":-1},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)", "stimulus":"@RE(\\[OK\\])", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"write&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"end&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;configureprompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"username &lt;&lt;manacctname&gt;&gt; password &lt;&lt;manacctnewpwd&gt;&gt;&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;configureprompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"conf t&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Success(Password change succeeded)", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"write mem&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"end&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;configureprompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"username &lt;&lt;manacctname&gt;&gt; password &lt;&lt;manacctnewpwd&gt;&gt;&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;configureprompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"conf t&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"&lt;&lt;cr&gt;&gt;&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE((?&lt;!grep )NX-OS)", "timeout":-1},
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Timeout)", "stimulus":"@RE((?i)timeout)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE(%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password policy violation)", "stimulus":"@RE(password is weak)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Cannot make changes for elevated user)", "stimulus":"@RE(cannot make changes)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Specified password encryption is not supported)", "stimulus":"@RE(No token match|% String failed)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Unknown error)", "stimulus":"@RE((?&lt;!password |username |secret )%|(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error comitting changes)", "stimulus":"@RE(%(?i)error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(enable command failed)", "stimulus":"@RE(% Error)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid enable password)", "stimulus":"@RE(% Access denied)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Invalid encryption type or password)", "stimulus":"@RE(Invalid)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not use MD5 secrets for passwords)", "stimulus":"@RE(ERROR: Can not use MD5 secrets)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Can not have both a user password and a user secret)", "stimulus":"@RE(ERROR: Can not have both a user password and a user secret)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Empty password specified)", "stimulus":"@RE(% Incomplete command)", "timeout":0},
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Password does not satisfy the password policy)", "stimulus":"@RE(% Invalid Password)", "timeout":0}],
+	"id":"", "line_delay":-1,"response":"enable&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"id":"", "line_delay":-1,"response":"show version | grep NX-OS&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"name":"ChangePassword",
+	"type":1},{"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Success(Password check succeeded)", "stimulus":"@RE(&lt;&lt;prompt&gt;&gt;)", "timeout":-1}],
+	"name":"CheckPassword",
+	"type":2},{"expect":[
+				{"char_delay":-1,"expect":[
+				{"char_delay":-1,"expect":[],"id":"", "line_delay":-1,"response":"&lt;&lt;exitcommand&gt;&gt;@Failure(Error)", "stimulus":"@RE()", "timeout":0}],
+	"id":"", "line_delay":-1,"response":"&lt;&lt;endofline&gt;&gt;", "stimulus":"@RE()", "timeout":-1}],
+	"name":"ReplacePublicKey",
+	"type":4}]}</Template>
+</CustomPlatform>
